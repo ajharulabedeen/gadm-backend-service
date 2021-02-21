@@ -5,6 +5,11 @@
  */
 package xyz.neomtech.gadm.bangladesh.models;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -18,6 +23,10 @@ import java.util.Collection;
 @Entity
 @Table(name = "divisions")
 @XmlRootElement
+@ToString
+@Getter
+@Setter
+@NoArgsConstructor
 @NamedQueries({
     @NamedQuery(name = "Divisions.findAll", query = "SELECT d FROM Divisions d")
     , @NamedQuery(name = "Divisions.findById", query = "SELECT d FROM Divisions d WHERE d.id = :id")
@@ -34,25 +43,16 @@ public class Divisions implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-//    @NotNull
-//    @Size(min = 1, max = 25)
     @Column(name = "name")
     private String name;
     @Basic(optional = false)
-//    @NotNull
-//    @Size(min = 1, max = 25)
     @Column(name = "bn_name")
     private String bnName;
     @Basic(optional = false)
-//    @NotNull
-//    @Size(min = 1, max = 50)
     @Column(name = "url")
     private String url;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "divisionId")
     private Collection<Districts> districtsCollection;
-
-    public Divisions() {
-    }
 
     public Divisions(Integer id) {
         this.id = id;
@@ -62,38 +62,6 @@ public class Divisions implements Serializable {
         this.id = id;
         this.name = name;
         this.bnName = bnName;
-        this.url = url;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getBnName() {
-        return bnName;
-    }
-
-    public void setBnName(String bnName) {
-        this.bnName = bnName;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
         this.url = url;
     }
 
@@ -125,14 +93,4 @@ public class Divisions implements Serializable {
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "id=" + id + ", name=" + name + ", bnName=" + bnName + ", url=" + url;
-    }
-    
-//    @Override
-//    public String toString() {
-//        return "Divisions{" + "id=" + id + ", name=" + name + ", bnName=" + bnName + ", url=" + url + ", districtsCollection=" + districtsCollection + '}';
-//    }
 }

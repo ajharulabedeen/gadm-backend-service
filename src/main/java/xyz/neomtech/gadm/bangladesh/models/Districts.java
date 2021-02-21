@@ -5,6 +5,8 @@
  */
 package xyz.neomtech.gadm.bangladesh.models;
 
+import lombok.ToString;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -18,6 +20,7 @@ import java.util.Collection;
 @Entity
 @Table(name = "districts")
 @XmlRootElement
+@ToString
 @NamedQueries({
     @NamedQuery(name = "Districts.findAll", query = "SELECT d FROM Districts d")
     , @NamedQuery(name = "Districts.findById", query = "SELECT d FROM Districts d WHERE d.id = :id")
@@ -35,24 +38,16 @@ public class Districts implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-//    @NotNull
-//    @Size(min = 1, max = 25)
     @Column(name = "name")
     private String name;
     @Basic(optional = false)
-//    @NotNull
-//    @Size(min = 1, max = 25)
     @Column(name = "bn_name")
     private String bnName;
-//    @Size(max = 15)
     @Column(name = "lat")
     private String lat;
-//    @Size(max = 15)
     @Column(name = "lon")
     private String lon;
     @Basic(optional = false)
-//    @NotNull
-//    @Size(min = 1, max = 50)
     @Column(name = "url")
     private String url;
     @JoinColumn(name = "division_id", referencedColumnName = "id")
@@ -160,9 +155,4 @@ public class Districts implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "com.donatedrop.models.Districts[ id=" + id + " ]";
-    }
-    
 }
